@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import seaborn as sb
 #
 #Retrieve data
-df = pd.read_csv('demanddata2009_2024_with_holidays.csv')
+df = pd.read_csv('demanddata2009_2024.csv')
 #
 # Pre-processing
 # 1) remove columns with Null values
@@ -24,7 +24,7 @@ df.reset_index(drop=True, inplace=True)
 # Settlement period equal to 0 corresponds with 00:00:00 and 48 with 23:30:00
 df['PERIOD_HOUR'] = (df['SETTLEMENT_PERIOD']).apply(lambda x: str(dt.timedelta(hours=(x - 1) * 0.5)))
 df.loc[df['PERIOD_HOUR'] == '1 day, 0:00:00', 'PERIOD_HOUR'] = '0:00:00'
-df['SETTLEMENT_DATE'] = df['SETTLEMENT_DATE'].apply(lambda x: str(dt.datetime.strptime(x, '%d/%m/%Y').strftime('%Y/%m/%d')))
+df['SETTLEMENT_DATE'] = df['SETTLEMENT_DATE'].apply(lambda x: str(dt.datetime.strptime(x, '%Y-%m-%d').strftime('%Y/%m/%d')))
 df['SETTLEMENT_DATE'] = pd.to_datetime((df['SETTLEMENT_DATE'] + ' ' + df['PERIOD_HOUR']))
 #
 # 4) Categorization for visualizations
