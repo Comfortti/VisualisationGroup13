@@ -16,11 +16,11 @@ df['Month'] = df['SETTLEMENT_DATETIME'].dt.month
 plt.figure(figsize=(10, 6))
 sns.boxplot(x='Month', y='value', hue='variable', data=pd.melt(df, id_vars=['Year', 'Month'], value_vars=['ND', 'TSD', 'ENGLAND_WALES_DEMAND']))
 
-# Set labels and title
+# Have labels and title
 plt.xlabel('Month')
 plt.ylabel('Demand (MW)')
 plt.title('Demand by Month')
 
-# Show plot
+# Show the plot
 plt.legend(title='Type of Demand')
 plt.show()
